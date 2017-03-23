@@ -6,15 +6,8 @@ The output of the computation is compatible with the software [scatnet](https://
 
 # Requirements
 
-To run the main code:
-
  - Python 2.7 (not tested yet with Python 3.x)
  - A CUDA capable GPU with [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit) correctly installed
-
-To create filters:
-
- - [Octave](https://www.gnu.org/software/octave/) installed
- - [scatnet](https://github.com/scatnet/scatnet) installed and in the default octave path
 
 # Installation
 

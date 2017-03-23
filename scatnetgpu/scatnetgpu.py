@@ -7,30 +7,21 @@ from pycuda import gpuarray
 from pycuda.elementwise import ElementwiseKernel
 import skcuda.fft as cu_fft
 
+from filter_banks import morlet_filter_bank_2d
 
 def get_filters(J, L, shape=None, margin=(0,0)):
-    try:
-        from oct2py import octave
-    except ImportError as e:
-        print "oct2py not found. It is still necessary to create filters."
-        raise e
-
     assert (shape[0]>=2**J and shape[1]>=2**J), "Shape ({}) must be less then {}".format(shape, 2**J)
 
-    this_path = os.path.dirname(os.path.realpath(__file__))
-    print "adding {} to octave path".format(this_path)
-    octave.addpath(this_path)
-
-    filters = octave.build_filter_for_python_fft(J, L, np.array(shape), np.array(margin))
+    filters = morlet_filter_bank_2d(shape, J=J, L=L)
 
     kernels = {
         'J': J,
         'L': L,
-        'j': np.array([-1]+list(filters.psi.meta.j[0,:])),
-        'l': np.array([0]+list(filters.psi.meta.theta[0,:])),
+        'j': np.array([-1]+list(filters['meta']['j'])),
+        'l': np.array([0]+list(filters['meta']['theta'])),
         # 'filter' is a list of 3d-arrays. Each array is the bundle of FT of filters at different sizes.
         # First axis is the filter index, 2nd and 3rd axis are width and height in Fourier space
-        'filter': [np.array([filters.phi.filter['coefft'][n]] + [filters.psi.filter[i]['coefft'][0][0, n] for i in range(len(filters.psi.filter))]) for n in range(len(filters.phi.filter['coefft']))],
+        'filter': [np.array([filters['phi'][n]] + [filters['psi'][i][n] for i in range(len(filters['psi']))], dtype=np.float32) for n in range(len(filters['phi']))],
         'fft': True,
         'margin': margin
     }

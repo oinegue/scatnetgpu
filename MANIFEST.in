@@ -1,2 +1,1 @@
 include README.md
-include scatnetgpu/build_filter_for_python_fft.m
