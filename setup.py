@@ -6,7 +6,7 @@ def readme():
 
 
 setup(name='scatnetgpu',
-      version='1.0',
+      version='1.1',
       description='Scattering Network for Python and CUDA',
       long_description=readme(),
       url='http://github.com/oinegue/scatnetgpu',
