@@ -18,8 +18,7 @@ setup(name='scatnetgpu',
           'pycuda>=2016.1.2',
           'scikit-cuda>=0.5.1',
           'numpy',
-          'scipy',
-          'oct2py',
+          'scipy'
       ],
       include_package_data=True,
       zip_safe=False)
