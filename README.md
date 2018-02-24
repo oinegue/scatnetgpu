@@ -1,6 +1,6 @@
 # Description
 
-`scatnetgpu` is a module to compute the Scattering Network representation [1] of an image using the power of a CUDA capable GPU.
+`scatnetgpu` is a module to compute the Scattering Network representation [1] of an image using the power of a CUDA capable GPU. This software has been created for my thesis: [Scattering networks: efficient 2D implementation and application to melanoma classification](http://amslaurea.unibo.it/id/eprint/12261).
 
 The output of the computation is compatible with the software [scatnet](https://github.com/scatnet/scatnet).
 
